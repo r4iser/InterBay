@@ -100,6 +100,7 @@
 	equip(var/mob/living/carbon/human/H)
 		..()
 		H.add_stats(rand(5,7), rand(5,8), rand(12,15))
+		H.add_skills(rand(25, 50), rand(25,50), rand(65, 75))
 
 /datum/job/scientist
 	title = "Tenchotrainee"
@@ -115,6 +116,7 @@
 	equip(var/mob/living/carbon/human/H)
 		..()
 		H.add_stats(rand(5,7), rand(5,8), rand(10,14))
+		H.add_skills(rand(25, 50), rand(25,50), rand(65, 75))
 
 /datum/job/doctor
 	selection_color = "#633d63"
@@ -153,7 +155,7 @@
 
 	equip(var/mob/living/carbon/human/H)
 		..()
-		H.add_stats(rand(11,16), rand(10,14), rand(8,12))
+		H.add_stats(rand(12,16), rand(10,14), rand(8,12))
 		H.add_skills(rand(60, 75), rand(60,75))
 
 
@@ -294,8 +296,8 @@
 	minimal_player_age = 16
 	economic_modifier = 2
 	ideal_character_age = 21
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	
 	equip(var/mob/living/carbon/human/H)
 		..()

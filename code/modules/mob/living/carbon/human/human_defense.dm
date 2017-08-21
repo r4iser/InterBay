@@ -189,12 +189,13 @@ meteor_act
 
 	var/hit_zone = get_zone_with_miss_chance(target_zone, src)
 
+
 	if(!hit_zone)
 		visible_message("<span class='danger'>\The [user] misses [src] with \the [I]!</span>")
 		playsound(loc, 'sound/weapons/punchmiss.ogg', 50, 1)
 		return null
 
-	if(!user.combat_mode && !skillcheck(user.melee, 60, 0))
+	if(!user.combat_mode && !skillcheck(user.melee_skill, 60, 0, user))
 		visible_message("<span class='danger'>[user] botches the attack on [src]!</span>")
 		playsound(loc, 'sound/weapons/punchmiss.ogg', 50, 1)
 		return null
@@ -202,10 +203,18 @@ meteor_act
 	if(check_shields(I.force, I, user, target_zone, "the [I.name]"))
 		return null
 
+
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if (!affecting || affecting.is_stump())
 		to_chat(user, "<span class='danger'>They are missing that limb!</span>")
+		playsound(loc, 'sound/weapons/punchmiss.ogg', 50, 1)
 		return null
+
+
+	if(hit_zone == (BP_CHEST || BP_MOUTH || BP_THROAT || BP_HEAD))//If we're lying and we're trying to aim high, we won't be able to hit.
+		if(user.lying && !src.lying)
+			to_chat(user, "<span class='notice'><b>I can't reach their [affecting.name]!</span></b>")
+			return null
 
 	return hit_zone
 
@@ -228,9 +237,6 @@ meteor_act
 	if(!affecting)
 		return 0
 
-	if(user.str)
-		I.force *= strToDamageModifier(user.str)
-
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
 		effective_force *= 0.66 //reduced effective force...
@@ -245,12 +251,7 @@ meteor_act
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
-	
-	//Slicing a throat. Calls for sharpness instead of force because we don't want things that aren't sharp to be able to cut off heads.
-	//if(I.sharp && hit_zone == BP_THROAT)
-		
-	//		src.visible_message("<span class='danger'>[user] slices [src]'s throat!</span>")
-	
+
 	if(I.sharp && prob(I.sharpness * 2) && !(affecting.status & ORGAN_ARTERY_CUT))
 		affecting.sever_artery()
 		if(affecting.artery_name == "cartoid artery")
@@ -261,9 +262,9 @@ meteor_act
 	if(I.sharp && I.edge)//Experimental change to make sword fights less shitty.
 		if(prob(I.sharpness))
 			affecting.droplimb(0, DROPLIMB_EDGE)
-	
+
 	var/obj/item/organ/external/head/O = locate(/obj/item/organ/external/head) in src.organs
-	
+
 	if(I.damtype == BRUTE && !I.edge && prob(I.force * (hit_zone == BP_MOUTH ? 6 : 0)) && O)//Knocking out teeth.
 		if(O.knock_out_teeth(get_dir(user, src), round(rand(28, 38) * ((I.force*1.5)/100))))
 			src.visible_message("<span class='danger'>[src]'s teeth sail off in an arc!</span>", \
@@ -283,6 +284,7 @@ meteor_act
 					apply_effect(6, WEAKEN, blocked)
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)
+
 	return 1
 
 /mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, var/effective_force, var/hit_zone)
