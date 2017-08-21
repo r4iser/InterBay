@@ -202,7 +202,7 @@
 "dT" = (/obj/machinery/nuclearbomb,/turf/simulated/floor/greengrid,/area/dreyfus/administration/bureaux/directeur)
 "dU" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/dreyfus/administration/bureaux/openspace)
 "dV" = (/obj/structure/table/standard,/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/dreyfus/administration/bureaux/openspace)
-"dW" = (/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; pixel_x = 0; pixel_y = -24; tag = "icon-intercom (NORTH)"},/obj/machinery/light_switch{pixel_x = -22},/obj/structure/closet/syndicate,/obj/item/weapon/material/sword/sabre,/turf/simulated/floor/carpet,/area/dreyfus/administration/bureaux/directeur)
+"dW" = (/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; pixel_x = 0; pixel_y = -24; tag = "icon-intercom (NORTH)"},/obj/machinery/light_switch{pixel_x = -22},/obj/structure/closet/syndicate,/obj/item/weapon/material/sword/sabre,/obj/item/weapon/pinpointer,/turf/simulated/floor/carpet,/area/dreyfus/administration/bureaux/directeur)
 "dX" = (/obj/structure/bed,/obj/item/weapon/bedsheet/captain,/turf/simulated/floor/carpet,/area/dreyfus/administration/bureaux/directeur)
 "dY" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/carpet,/area/dreyfus/administration/bureaux/directeur)
 "dZ" = (/obj/structure/bed/chair/comfy/blue{tag = "icon-comfychair_preview (NORTH)"; icon_state = "comfychair_preview"; dir = 1},/turf/simulated/floor/wood,/area/dreyfus/administration/bureaux/directeur)
