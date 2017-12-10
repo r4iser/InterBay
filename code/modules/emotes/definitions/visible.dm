@@ -35,7 +35,7 @@
 	check_restraints = TRUE
 	emote_message_3p = "USER does a sick as fuck dab."
 
-/decl/emote/visible/dab/do_extra(var/mob/user)
+/decl/emote/visible/dab/do_extra(var/mob/living/user)
 	if(istype(user))
 		user.adjustBrainLoss(rand(5,25))
 
