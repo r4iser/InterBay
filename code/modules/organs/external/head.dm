@@ -19,7 +19,7 @@
 	var/can_intake_reagents = 1
 	var/eye_icon = "eyes_s"
 	var/has_lips
-	var/list/teeth_list() = list()
+	var/list/teeth_list = list()
 	var/max_teeth = 32
 
 /obj/item/organ/external/head/get_agony_multiplier()
